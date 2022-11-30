@@ -7,15 +7,27 @@ const server = Hapi.server({
     host: '0.0.0.0'
 });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, h) => {
+server.route([
+    {
+        method: 'GET',
+        path: '/',
+        handler: (request, h) => {
+    
+            request.logger.info('In handler %s', request.path);
+            return 'Hello, world!';
+        }
+    },
+    {
+        method: 'GET',
+        path: '/test',
+        handler: (request, h) => {
 
-        request.logger.info('In handler %s', request.path);
-        return 'Hello, world!';
+            test();
+            request.logger.info("test")
+            return 'Hello, world!';
+        }
     }
-});
+]);
 
 const init = async () => {
 
